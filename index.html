@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Interests & Papers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f7fb;
+      color: #333;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .form-container {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #ecf0f1;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Research Interests & Papers</h1>
+
+  <!-- Research Interest Form -->
+  <div class="form-container">
+    <h2>Add Research Interest</h2>
+    <input type="text" id="interestInput" placeholder="Enter research interest">
+    <button onclick="addInterest()">Add Interest</button>
+    <ul id="interestList"></ul>
+  </div>
+
+  <!-- Research Paper Form -->
+  <div class="form-container">
+    <h2>Add Research Paper</h2>
+    <input type="text" id="paperTitle" placeholder="Paper Title">
+    <input type="text" id="paperYear" placeholder="Year">
+    <input type="text" id="paperLink" placeholder="Link (optional)">
+    <button onclick="addPaper()">Add Paper</button>
+    <ul id="paperList"></ul>
+  </div>
+
+  <script>
+    const interests = [];
+    const papers = [];
+
+    function addInterest() {
+      const input = document.getElementById("interestInput");
+      const value = input.value.trim();
+      if (value) {
+        interests.push(value);
+        displayInterests();
+        input.value = "";
+      } else {
+        alert("Please enter a research interest!");
+      }
+    }
+
+    function displayInterests() {
+      const list = document.getElementById("interestList");
+      list.innerHTML = "";
+      interests.forEach((interest, index) => {
+        list.innerHTML += `<li>${index+1}. ${interest}</li>`;
+      });
+    }
+
+    function addPaper() {
+      const title = document.getElementById("paperTitle").value.trim();
+      const year = document.getElementById("paperYear").value.trim();
+      const link = document.getElementById("paperLink").value.trim();
+
+      if (title && year) {
+        papers.push({title, year, link});
+        displayPapers();
+        document.getElementById("paperTitle").value = "";
+        document.getElementById("paperYear").value = "";
+        document.getElementById("paperLink").value = "";
+      } else {
+        alert("Please enter both title and year of the paper!");
+      }
+    }
+
+    function displayPapers() {
+      const list = document.getElementById("paperList");
+      list.innerHTML = "";
+      papers.forEach((paper, index) => {
+        list.innerHTML += `<li>
+          <strong>${paper.title}</strong> (${paper.year})
+          ${paper.link ? `<br><a href="${paper.link}" target="_blank">Read Paper</a>` : ""}
+        </li>`;
+      });
+    }
+  </script>
+
+</body>
+</html>
